@@ -10,7 +10,7 @@ export default function (song: SongModel): Song {
 		capodastrePosition: songJSON.capodastrePosition,
 		tuning: songJSON.tuning,
 		instrument: songJSON.instrument,
-		parts: songJSON.parts
+		parts: (songJSON.parts || [])
 			.sort((a, b) => a.order - b.order)
 			.map((part) => ({
 				type: part.type,

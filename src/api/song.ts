@@ -8,7 +8,16 @@ import chordService from '../services/chord';
 
 const songRouter: Router = Router();
 
-songRouter.get('/:songId', async function (req: Request, res: Response, next: NextFunction) {
+songRouter.get('/all', async function (req, res, next) {
+	try {
+		const songs = await songService.fetchAllSongs();
+		res.json({ songs });
+	} catch (e) {
+		next(e);
+	}
+});
+
+songRouter.get('/:songId', async function (req, res, next) {
 	try {
 		const { songId } = req.params;
 		const song = await songService.fetchSongById(parseInt(songId));
@@ -18,7 +27,7 @@ songRouter.get('/:songId', async function (req: Request, res: Response, next: Ne
 	}
 });
 
-songRouter.post('/', async function (req: Request, res: Response, next: NextFunction) {
+songRouter.post('/', async function (req, res, next) {
 	try {
 		const song: Song = req.body;
 		// Store song element

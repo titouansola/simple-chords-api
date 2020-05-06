@@ -15,9 +15,15 @@ async function fetchSongById(songId: number) {
 	} else {
 		return Promise.reject(new NotFoundError(`Unable to find song with id ${songId}`));
 	}
+};
+
+async function fetchAllSongs() {
+	const songEntities = await songRepository.getAllSongs();
+	return songEntities.map(mapSong);
 }
 
 export default {
 	storeSong,
-	fetchSongById
+	fetchSongById,
+	fetchAllSongs
 }

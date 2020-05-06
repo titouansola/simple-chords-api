@@ -19,9 +19,14 @@ async function getSongById(songId: number): Promise<SongModel> {
 	return await SongModel.query()
 		.findById(songId)
 		.withGraphFetched('parts.lines.chords');
+};
+
+async function getAllSongs(): Promise<SongModel[]> {
+	return await SongModel.query().select('*');
 }
 
 export default {
 	storeSong,
-	getSongById
+	getSongById,
+	getAllSongs
 }
