@@ -5,6 +5,7 @@ export default function (song: SongModel): Song {
 	const songJSON = song.toJSON();
 	//
 	return {
+		id: songJSON.id,
 		author: songJSON.author,
 		title: songJSON.title,
 		capodastrePosition: songJSON.capodastrePosition,

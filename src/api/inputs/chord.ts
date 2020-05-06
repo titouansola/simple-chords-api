@@ -19,8 +19,8 @@ export enum Fondamental {
 };
 
 export default interface Chord {
-	fondamental: Fondamental,
-	minor: boolean,
-	qualities: Array<string>,
-	position: number
+	fondamental: Fondamental;
+	minor: boolean;
+	qualities: string;
+	position: number;
 };

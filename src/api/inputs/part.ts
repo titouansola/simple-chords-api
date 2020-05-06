@@ -7,7 +7,7 @@ export enum PartType {
 }
 
 export default interface Part {
-	type: PartType,
-	order: number,
-	lines: Array<Line>
+	type: PartType;
+	order: number;
+	lines: Array<Line>;
 }
