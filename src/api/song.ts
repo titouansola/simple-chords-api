@@ -1,6 +1,7 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Router } from 'express';
 import { flatten } from 'lodash'; 
 import Song from './inputs/song';
+import SongQuery from './inputs/songQuery';
 import songService from '../services/song';
 import partService from '../services/part';
 import lineService from '../services/line';
@@ -9,9 +10,10 @@ import chordService from '../services/chord';
 const songRouter: Router = Router();
 
 songRouter.get('/all', async function (req, res, next) {
+	const query: any = req.query;
 	try {
-		const songs = await songService.fetchAllSongs();
-		res.json({ songs });
+		const songPage = await songService.fetchAllSongs(query as SongQuery);
+		res.json(songPage);
 	} catch (e) {
 		next(e);
 	}

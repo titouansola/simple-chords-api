@@ -1,0 +1,1 @@
+export const MAX_SONG_PER_PAGE = 20;

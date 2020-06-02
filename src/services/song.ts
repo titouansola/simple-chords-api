@@ -2,6 +2,8 @@ import Song from '../api/inputs/song';
 import songRepository from '../repository/song';
 import NotFoundError from '../errors/notfound.error';
 import mapSong from '../mappers/song';
+import SongQuery from '../api/inputs/songQuery';
+import { MAX_SONG_PER_PAGE } from '../constants';
 
 async function storeSong(song: Song) {
 	return await songRepository.storeSong(song);
@@ -17,9 +19,13 @@ async function fetchSongById(songId: number) {
 	}
 };
 
-async function fetchAllSongs() {
-	const songEntities = await songRepository.getAllSongs();
-	return songEntities.map(mapSong);
+async function fetchAllSongs(query: SongQuery) {
+	const songEntities = await songRepository.getAllSongs(query);
+	return {
+		total: songEntities.total,
+		pageAmount: Math.ceil(songEntities.total / MAX_SONG_PER_PAGE),
+		songs: songEntities.results.map(mapSong)
+	};
 }
 
 export default {
